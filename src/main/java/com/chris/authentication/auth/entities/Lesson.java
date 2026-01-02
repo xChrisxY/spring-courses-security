@@ -16,6 +16,10 @@ public class Lesson {
     private Integer duration;
     private Integer position;
 
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
+
     public Lesson(){}
 
     public Long getId() {
