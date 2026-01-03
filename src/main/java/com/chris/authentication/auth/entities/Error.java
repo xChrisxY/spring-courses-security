@@ -1,19 +1,20 @@
 package com.chris.authentication.auth.entities;
 
 import java.util.Date;
+import java.util.Map;
 
 public class Error {
 
     private String message;
-    private String error;
+    private Map<String, Object> errors;
     private int status;
     private Date date;
 
     public Error(){}
 
-    public Error(String message, String error, int status, Date date) {
+    public Error(String message, Map<String, Object> errors, int status, Date date) {
         this.message = message;
-        this.error = error;
+        this.errors = errors;
         this.status = status;
         this.date = date;
     }
@@ -26,12 +27,12 @@ public class Error {
         this.message = message;
     }
 
-    public String getError() {
-        return error;
+    public Map<String, Object> getErrors() {
+        return errors;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setErrors(Map<String, Object> errors) {
+        this.errors = errors;
     }
 
     public int getStatus() {

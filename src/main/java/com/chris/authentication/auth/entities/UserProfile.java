@@ -64,4 +64,32 @@ public class UserProfile {
     public void setBio(String bio) {
         this.bio = bio;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
 }

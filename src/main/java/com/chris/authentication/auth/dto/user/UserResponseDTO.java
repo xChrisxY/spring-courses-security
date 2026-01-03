@@ -1,26 +1,21 @@
 package com.chris.authentication.auth.dto.user;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-
 public class UserResponseDTO {
 
-    @NotEmpty
-    @Min(0)
     private Long id;
-    @NotBlank
-    @Size(min = 3, max = 20)
     private String username;
-    @NotBlank
     private String email;
-    @NotBlank
-    private String password;
-    @NotBlank
-    private UserProfileDTO userProfileDTO;
+    private UserProfileDTO profile;
 
     public UserResponseDTO(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -38,19 +33,11 @@ public class UserResponseDTO {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public UserProfileDTO getProfile() {
+        return profile;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public UserProfileDTO getUserProfileDTO() {
-        return userProfileDTO;
-    }
-
-    public void setUserProfileDTO(UserProfileDTO userProfileDTO) {
-        this.userProfileDTO = userProfileDTO;
+    public void setProfile(UserProfileDTO profile) {
+        this.profile = profile;
     }
 }

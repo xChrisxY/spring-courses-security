@@ -124,4 +124,17 @@ public class User {
     public void setAudit(Audit audit) {
         this.audit = audit;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", profile=" + profile +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", audit=" + audit +
+                '}';
+    }
 }
