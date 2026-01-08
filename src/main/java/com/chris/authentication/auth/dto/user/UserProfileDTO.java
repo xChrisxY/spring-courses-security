@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
 public class UserProfileDTO {
 
     @JsonProperty("first_name")
-    @NotBlank
     @Size(min = 3, max = 20)
     private String firstName;
 

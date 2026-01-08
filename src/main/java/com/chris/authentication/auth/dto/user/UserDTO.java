@@ -1,5 +1,7 @@
 package com.chris.authentication.auth.dto.user;
 
+import com.chris.authentication.auth.validators.ExistsByUsername;
+import jakarta.persistence.Column;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +11,8 @@ public class UserDTO {
 
     @NotBlank
     @Size(min = 3, max = 20)
+    @Column(unique = true)
+    @ExistsByUsername
     private String username;
     @NotBlank
     private String email;
