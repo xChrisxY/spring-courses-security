@@ -48,6 +48,11 @@ public class Course {
         audit = new Audit();
     }
 
+    @PrePersist
+    public void prePersist(){
+        this.published = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }
@@ -126,5 +131,22 @@ public class Course {
 
     public void setEnrollments(Set<Enrollment> enrollments) {
         this.enrollments = enrollments;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "categories=" + categories +
+                ", enrollments=" + enrollments +
+                ", lessons=" + lessons +
+                ", profesor=" + profesor +
+                ", created_at=" + audit.getCreatedAt() +
+                ", updated_at=" + audit.getUpdatedAt() +
+                ", published=" + published +
+                ", level=" + level +
+                ", description='" + description + '\'' +
+                ", title='" + title + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

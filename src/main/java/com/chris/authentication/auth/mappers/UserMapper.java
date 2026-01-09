@@ -8,7 +8,7 @@ import com.chris.authentication.auth.entities.UserProfile;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {RoleMapper.class})
 public interface UserMapper {
 
     @Mapping(target = "passwordHash", source = "password")

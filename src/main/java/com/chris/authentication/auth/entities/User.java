@@ -53,6 +53,10 @@ public class User {
         this.enabled = true;
     }
 
+    public void addRoles(Role role){
+        this.roles.add(role);
+    }
+
     public Long getId() {
         return id;
     }
@@ -133,8 +137,9 @@ public class User {
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", profile=" + profile +
-                ", passwordHash='" + passwordHash + '\'' +
-                ", audit=" + audit +
+                ", created_at=" + audit.getCreatedAt() +
+                ", updated_at=" + audit.getUpdatedAt() +
+                ", roles" + roles +
                 '}';
     }
 }

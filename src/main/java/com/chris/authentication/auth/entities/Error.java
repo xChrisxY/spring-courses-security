@@ -3,16 +3,16 @@ package com.chris.authentication.auth.entities;
 import java.util.Date;
 import java.util.Map;
 
-public class Error {
+public class Error<T> {
 
     private String message;
-    private Map<String, Object> errors;
+    private T errors;
     private int status;
     private Date date;
 
     public Error(){}
 
-    public Error(String message, Map<String, Object> errors, int status, Date date) {
+    public Error(String message, T errors, int status, Date date) {
         this.message = message;
         this.errors = errors;
         this.status = status;
@@ -27,11 +27,11 @@ public class Error {
         this.message = message;
     }
 
-    public Map<String, Object> getErrors() {
+    public T getErrors() {
         return errors;
     }
 
-    public void setErrors(Map<String, Object> errors) {
+    public void setErrors(T errors) {
         this.errors = errors;
     }
 

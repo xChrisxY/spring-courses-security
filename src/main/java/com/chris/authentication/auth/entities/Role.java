@@ -13,6 +13,10 @@ public class Role {
 
     public Role(){}
 
+    public Role(String name){
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
@@ -27,5 +31,13 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

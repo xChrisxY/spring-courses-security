@@ -1,6 +1,7 @@
 package com.chris.authentication.auth.controllers;
 
 import com.chris.authentication.auth.entities.Error;
+import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class HandlerExceptionController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Error> methodArgumentNotValid(MethodArgumentNotValidException e){
+    public ResponseEntity<Error<Map<String, Object>>> methodArgumentNotValid(MethodArgumentNotValidException e){
 
         Map<String, Object> errors = new HashMap<>();
         List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();

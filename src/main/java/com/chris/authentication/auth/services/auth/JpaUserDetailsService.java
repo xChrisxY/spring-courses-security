@@ -34,7 +34,6 @@ public class JpaUserDetailsService implements UserDetailsService {
         }
 
         User user = optionalUser.get();
-        System.out.println(user);
 
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
