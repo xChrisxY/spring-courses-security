@@ -40,13 +40,16 @@ public class SpringSecurityConfig {
 
         jwtAuthenticationFilter.setFilterProcessesUrl("/api/v1/auth/login");
 
-
         return httpSecurity.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers(HttpMethod.POST, "/api/v1/auth/register").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/me").hasRole("STUDENT")
                 .requestMatchers(HttpMethod.GET, "/api/v1/users/{id}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/api/v1/users/{id}/role").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/api/v1/courses").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/courses").hasRole("TEACHER")
+                .requestMatchers(HttpMethod.GET, "/api/v1/courses").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/v1/courses/{id}").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/courses/{id}").hasRole("TEACHER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/{id}").hasAnyRole("TEACHER", "ADMIN")
 
                 .anyRequest().authenticated())
                 .addFilter(jwtAuthenticationFilter)

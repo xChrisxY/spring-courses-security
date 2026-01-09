@@ -21,9 +21,6 @@ public class CourseDTO {
     @NotNull
     private Level level;
 
-    @NotNull
-    private Long profesorId;
-
     public CourseDTO(){}
 
     public String getTitle() {
@@ -50,11 +47,4 @@ public class CourseDTO {
         this.level = level;
     }
 
-    public Long getProfesorId() {
-        return profesorId;
-    }
-
-    public void setProfesorId(Long profesorId) {
-        this.profesorId = profesorId;
-    }
 }

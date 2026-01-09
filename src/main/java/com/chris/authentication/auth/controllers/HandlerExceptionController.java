@@ -1,6 +1,8 @@
 package com.chris.authentication.auth.controllers;
 
 import com.chris.authentication.auth.entities.Error;
+import com.chris.authentication.auth.exceptions.courses.CourseNotFoundException;
+import com.chris.authentication.auth.exceptions.user.UserNotFoundException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,19 @@ public class HandlerExceptionController {
         Error error = new Error(
                 "Error de validación en el cuerpo de la petición",
                 errors,
+                HttpStatus.FORBIDDEN.value(),
+                new Date()
+        );
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(error);
+    }
+
+    @ExceptionHandler({CourseNotFoundException.class, UserNotFoundException.class})
+    public ResponseEntity<Error> entityNotFound(Exception e) {
+
+        Error error = new Error(
+                "Entidad no encontrada.",
+                e.getMessage(),
                 HttpStatus.FORBIDDEN.value(),
                 new Date()
         );
