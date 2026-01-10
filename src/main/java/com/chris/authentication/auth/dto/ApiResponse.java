@@ -2,9 +2,9 @@ package com.chris.authentication.auth.dto;
 
 public class ApiResponse<T> {
 
-    private boolean success;
+    private boolean success = true;
     private String message;
-    private int status;
+    private int status = 200;
     private T data;
 
     public ApiResponse(){}
@@ -13,6 +13,13 @@ public class ApiResponse<T> {
         this.success = success;
         this.message = message;
         this.status = status;
+        this.data = data;
+    }
+
+    public ApiResponse(String message, T data) {
+        this.success = true;
+        this.message = message;
+        this.status = 200;
         this.data = data;
     }
 

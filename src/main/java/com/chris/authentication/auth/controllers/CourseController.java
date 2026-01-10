@@ -4,9 +4,13 @@ import com.chris.authentication.auth.dto.ApiResponse;
 import com.chris.authentication.auth.dto.course.CourseDTO;
 import com.chris.authentication.auth.dto.course.CourseResponseDTO;
 import com.chris.authentication.auth.dto.course.CourseUpdateDTO;
+import com.chris.authentication.auth.dto.lesson.LessonDTO;
+import com.chris.authentication.auth.dto.lesson.LessonResponseDTO;
 import com.chris.authentication.auth.entities.Course;
+import com.chris.authentication.auth.entities.Lesson;
 import com.chris.authentication.auth.mappers.CourseMapper;
 import com.chris.authentication.auth.services.courses.CourseService;
+import com.chris.authentication.auth.services.lesson.LessonService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +25,16 @@ import java.util.List;
 public class CourseController {
 
     private CourseService courseService;
+    private LessonService lessonService;
     private CourseMapper courseMapper;
 
-    public CourseController(CourseService courseService, CourseMapper courseMapper){
+    public CourseController(
+            CourseService courseService,
+            LessonService lessonService,
+            CourseMapper courseMapper
+    ){
         this.courseService = courseService;
+        this.lessonService = lessonService;
         this.courseMapper = courseMapper;
     }
 
@@ -108,6 +118,38 @@ public class CourseController {
 
         courseService.delete(courseId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT.value()).build();
+
+    }
+
+    @PreAuthorize("hasRole('TEACHER')")
+    @PostMapping("/{id}/lessons")
+    public ResponseEntity<ApiResponse<LessonResponseDTO>> createLesson(@PathVariable Long id, @Valid @RequestBody LessonDTO dto){
+
+        LessonResponseDTO lessonResponseDTO = lessonService.create(id, dto);
+
+        ApiResponse<LessonResponseDTO> response = new ApiResponse<>(
+                true,
+                "Lesson created successfully",
+                201,
+                lessonResponseDTO
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED.value()).body(response);
+
+    }
+
+    @GetMapping("/{courseId}/lessons")
+    public ResponseEntity<ApiResponse<List<LessonResponseDTO>>> listLessons(@PathVariable Long courseId){
+
+        List<LessonResponseDTO> lessonResponseDTOS = lessonService.list(courseId);
+        ApiResponse<List<LessonResponseDTO>> response = new ApiResponse<>(
+                true,
+                "Lessons by course" + courseId + " retrieved successfully",
+                200,
+                lessonResponseDTOS
+        );
+
+        return ResponseEntity.status(HttpStatus.OK.value()).body(response);
 
     }
 

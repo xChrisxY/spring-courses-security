@@ -1,34 +1,23 @@
-package com.chris.authentication.auth.entities;
+package com.chris.authentication.auth.dto.lesson;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "lessons")
-public class Lesson {
+public class LessonDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @NotBlank
     private String title;
-    @Column(name = "video_url")
+    @Column(unique = true)
+    @JsonProperty("video_url")
     private String videoUrl;
+    @NotNull
     private Integer duration;
+    @NotNull
     private Integer position;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    public Lesson(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public LessonDTO(){}
 
     public String getTitle() {
         return title;
@@ -60,13 +49,5 @@ public class Lesson {
 
     public void setPosition(Integer position) {
         this.position = position;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 }

@@ -50,6 +50,12 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/api/v1/courses/{id}").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/v1/courses/{id}").hasRole("TEACHER")
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/courses/{id}").hasAnyRole("TEACHER", "ADMIN")
+                .requestMatchers(HttpMethod.POST, "/api/v1/courses/{id}/lessons").hasRole("TEACHER")
+                .requestMatchers(HttpMethod.GET, "/api/v1/courses/{id}/lessons").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/lessons/{id}").hasRole("TEACHER")
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/lessons/{id}").hasRole("TEACHER")
+                .requestMatchers(HttpMethod.POST, "/api/v1/categories").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
 
                 .anyRequest().authenticated())
                 .addFilter(jwtAuthenticationFilter)

@@ -19,6 +19,7 @@ public interface CourseMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "profesor", ignore = true)
+    // Aquí debe ser el DTO de Course no la entidad, esto crea una entidad nueva.
     void updateCourseFromDTO(Course source, @MappingTarget Course target);
 
 }

@@ -1,26 +1,14 @@
-package com.chris.authentication.auth.entities;
+package com.chris.authentication.auth.dto.lesson;
 
-import jakarta.persistence.*;
+public class LessonResponseDTO {
 
-@Entity
-@Table(name = "lessons")
-public class Lesson {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String title;
-    @Column(name = "video_url")
     private String videoUrl;
     private Integer duration;
     private Integer position;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    public Lesson(){}
+    public LessonResponseDTO(){}
 
     public Long getId() {
         return id;
@@ -60,13 +48,5 @@ public class Lesson {
 
     public void setPosition(Integer position) {
         this.position = position;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
     }
 }

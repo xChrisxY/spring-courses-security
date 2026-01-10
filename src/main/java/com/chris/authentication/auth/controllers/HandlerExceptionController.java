@@ -2,6 +2,7 @@ package com.chris.authentication.auth.controllers;
 
 import com.chris.authentication.auth.entities.Error;
 import com.chris.authentication.auth.exceptions.courses.CourseNotFoundException;
+import com.chris.authentication.auth.exceptions.lessons.LessonNotFoundException;
 import com.chris.authentication.auth.exceptions.user.UserNotFoundException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(error);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, UserNotFoundException.class})
+    @ExceptionHandler({CourseNotFoundException.class, UserNotFoundException.class, LessonNotFoundException.class})
     public ResponseEntity<Error> entityNotFound(Exception e) {
 
         Error error = new Error(

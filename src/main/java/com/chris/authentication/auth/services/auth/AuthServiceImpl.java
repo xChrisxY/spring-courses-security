@@ -3,8 +3,10 @@ package com.chris.authentication.auth.services.auth;
 import com.chris.authentication.auth.entities.Role;
 import com.chris.authentication.auth.entities.User;
 import com.chris.authentication.auth.entities.UserProfile;
+import com.chris.authentication.auth.exceptions.user.UserNotFoundException;
 import com.chris.authentication.auth.repositories.RoleRepository;
 import com.chris.authentication.auth.repositories.UserRepository;
+import com.chris.authentication.auth.security.utils.SecurityUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +50,13 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public String encryptPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    @Override
+    public User getAuthenticatedUser(){
+        String username = SecurityUtils.getCurrentUsername();
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("El usuario no fue encontrado"  + username));
     }
 
 }

@@ -6,4 +6,5 @@ public interface AuthService {
 
     User register(User user);
     String encryptPassword(String password);
+    User getAuthenticatedUser();
 }
