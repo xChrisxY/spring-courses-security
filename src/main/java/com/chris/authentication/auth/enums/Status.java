@@ -4,5 +4,4 @@ public enum Status {
     ACTIVE,
     CANCELLED,
     COMPLETED
-
 }

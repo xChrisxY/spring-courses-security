@@ -40,7 +40,6 @@ public class CourseServiceImpl implements CourseService{
 
         course.setProfesor(profesor);
         return courseRepository.save(course);
-
     }
 
     @Override

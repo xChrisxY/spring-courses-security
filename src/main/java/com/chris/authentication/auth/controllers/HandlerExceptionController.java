@@ -2,6 +2,7 @@ package com.chris.authentication.auth.controllers;
 
 import com.chris.authentication.auth.entities.Error;
 import com.chris.authentication.auth.exceptions.courses.CourseNotFoundException;
+import com.chris.authentication.auth.exceptions.enrollment.EnrollmentNotFoundException;
 import com.chris.authentication.auth.exceptions.lessons.LessonNotFoundException;
 import com.chris.authentication.auth.exceptions.user.UserNotFoundException;
 import io.jsonwebtoken.JwtException;
@@ -40,7 +41,12 @@ public class HandlerExceptionController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(error);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, UserNotFoundException.class, LessonNotFoundException.class})
+    @ExceptionHandler({
+            CourseNotFoundException.class,
+            UserNotFoundException.class,
+            LessonNotFoundException.class,
+            EnrollmentNotFoundException.class
+    })
     public ResponseEntity<Error> entityNotFound(Exception e) {
 
         Error error = new Error(
@@ -50,6 +56,18 @@ public class HandlerExceptionController {
                 new Date()
         );
 
+        return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(error);
+    }
+
+    @ExceptionHandler({IllegalStateException.class})
+    public ResponseEntity<Error> illegalStateException(IllegalStateException e){
+
+        Error error = new Error(
+                "No se puede completar una lección a un curso donde no pertenece",
+                e.getMessage(),
+                HttpStatus.FORBIDDEN.value(),
+                new Date()
+        );
         return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(error);
     }
 

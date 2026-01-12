@@ -56,6 +56,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/api/v1/lessons/{id}").hasRole("TEACHER")
                 .requestMatchers(HttpMethod.POST, "/api/v1/categories").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.GET, "/api/v1/categories").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/enrollements").hasRole("STUDENT")
 
                 .anyRequest().authenticated())
                 .addFilter(jwtAuthenticationFilter)

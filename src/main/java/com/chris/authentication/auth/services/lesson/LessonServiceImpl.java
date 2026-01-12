@@ -11,6 +11,7 @@ import com.chris.authentication.auth.repositories.CourseRepository;
 import com.chris.authentication.auth.repositories.LessonRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,9 @@ public class LessonServiceImpl implements LessonService {
         this.lessonMapper = lessonMapper;
     }
 
-    @PreAuthorize("@courseSecurity.isOwner(#courseId)")
     @Override
+    @Transactional
+    @PreAuthorize("@courseSecurity.isOwner(#courseId)")
     public LessonResponseDTO create(Long courseId, LessonDTO lessonDTO){
 
         Lesson newLesson = lessonMapper.lessonDTOToLesson(lessonDTO);
@@ -49,6 +51,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<LessonResponseDTO> list(Long courseId){
 
         List<Lesson> lessons = lessonRepository.findLessonsByCourseId(courseId);
@@ -61,8 +64,9 @@ public class LessonServiceImpl implements LessonService {
         return lessonResponseDTOS;
     }
 
-    @PreAuthorize("@lessonSecurity.isLessonOwner(#lessonId)")
     @Override
+    @Transactional
+    @PreAuthorize("@lessonSecurity.isLessonOwner(#lessonId)")
     public LessonResponseDTO update(Long lessonId, LessonDTO lessonDTO){
 
         Lesson existingLesson = lessonRepository.findById(lessonId)
@@ -75,6 +79,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
+    @Transactional
     @PreAuthorize("@lessonSecurity.isLessonOwner(#lessonId)")
     public void delete(Long lessonId){
 
